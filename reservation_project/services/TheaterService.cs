@@ -11,11 +11,12 @@ namespace reservation_project.services
     public class TheaterService:ITheaterService
     {
         private readonly ITheaterStore _theaterStore;
-        private readonly IPlayService _playService;
+        private readonly IPlayStore _playStore;
         private readonly IMapper _mapper;
-        public TheaterService(ITheaterStore theaterStore)
+        public TheaterService(ITheaterStore theaterStore, IPlayStore playStore)
         {
             _theaterStore = theaterStore;
+            _playStore = playStore;
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CreateTheaterRequest, TheaterEntity>();
@@ -44,11 +45,11 @@ namespace reservation_project.services
         public async Task DeleteTheater(string theaterId)
         {
             var theater = await _theaterStore.GetTheater(theaterId);
-            var plays = await _playService.GetPlaysList(theater.TheaterId);
+            var plays = await _playStore.GetPlaysList(theater.Id);
             string errorMessage = "";
             foreach (Play play in plays )
             {
-                string message = $"in Play {play.PlayName} : ";
+                string message = $"in Play {play.Name} : ";
                 foreach(Seat seat in play.SeatsList)
                 {
                     if (seat.ReservationIsConfirmed)
@@ -57,7 +58,7 @@ namespace reservation_project.services
                         
                     }
                 }
-                if (message != $"in Play {play.PlayName} : ")
+                if (message != $"in Play {play.Name} : ")
                 {
                     errorMessage += message;
                 }
@@ -69,6 +70,7 @@ namespace reservation_project.services
             else
             {
                 await _theaterStore.DeleteTheater(theaterId);
+                await _playStore.DeletePlays(theaterId);
             }
         }
 

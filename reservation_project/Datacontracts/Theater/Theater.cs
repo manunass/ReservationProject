@@ -4,10 +4,11 @@ namespace reservation_project.Datacontracts.Theaters
     public class Theater
     {
         
-        public string TheaterId { get; set; }
-        public string TheaterName { get; set; }
-        public string TheaterCity { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string City { get; set; }
         public string PlaysId { get; set; }
+        public int NumberOfSeats { get; set; }
 
 
     }

@@ -13,6 +13,7 @@
     <None Remove="Datacontracts\Play\" />
     <None Remove="AutoMapper" />
     <None Remove="MongoDB.Driver" />
+    <None Remove="Datacontracts\Seats\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="services\" />
@@ -21,6 +22,7 @@
     <Folder Include="Datacontracts\Theater\" />
     <Folder Include="Store\" />
     <Folder Include="Datacontracts\Plays\" />
+    <Folder Include="Datacontracts\Seats\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />

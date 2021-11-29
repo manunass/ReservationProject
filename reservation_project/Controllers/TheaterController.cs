@@ -33,7 +33,7 @@ namespace reservation_project.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] CreateTheaterRequest createTheaterRequest)
+        public async Task<IActionResult> PostTheater([FromBody] CreateTheaterRequest createTheaterRequest)
         {
 
             Theater response =await _theaterService.AddTheater(createTheaterRequest);
